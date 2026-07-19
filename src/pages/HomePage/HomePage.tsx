@@ -1633,7 +1633,7 @@ function ContactSection({
     ],
   };
 
-  const contactFaqs = (CONTACT_FAQS[currentIdentity] || CONTACT_FAQS.other).slice(0, 3);
+  const contactFaqs = (CONTACT_FAQS[identityFilter] || CONTACT_FAQS.other).slice(0, 3);
   const filteredCaseOptions = useMemo(() => {
     const mapping: Record<string, string[]> = {
       student: ['array', 'paper', 'visualization', 'diagnosis', 'other'],
@@ -1642,9 +1642,9 @@ function ContactSection({
       institute: ['array', 'paper', 'visualization', 'diagnosis', 'other'],
       other: ['array', 'paper', 'visualization', 'iot', 'diagnosis', 'other'],
     };
-    const allowed = mapping[currentIdentity] || mapping.other;
+    const allowed = mapping[identityFilter] || mapping.other;
     return CONTACT_CASE_OPTIONS.filter((o) => allowed.includes(o.value));
-  }, [currentIdentity]);
+  }, [identityFilter]);
 
   // 社交账号悬停二维码
   const [hoveredSocial, setHoveredSocial] = useState<string | null>(null);
@@ -1786,8 +1786,8 @@ function ContactSection({
                 </div>
                 <span className="text-sm font-medium">常见问题</span>
                 <span className="text-xs text-muted-foreground">
-                  {MOCK_IDENTITIES.find((i) => i.id === currentIdentity)?.icon}{' '}
-                  {MOCK_IDENTITIES.find((i) => i.id === currentIdentity)?.title.split(' / ')[0] || '通用'}
+                  {MOCK_IDENTITIES.find((i) => i.id === identityFilter)?.icon}{' '}
+                  {MOCK_IDENTITIES.find((i) => i.id === identityFilter)?.title.split(' / ')[0] || '通用'}
                 </span>
               </div>
               <div className="space-y-3">
